@@ -1,21 +1,68 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-class App extends Component {
+
+class Form extends Component {
+  // Setting the component's initial state
+  state = {
+    topic: "",
+    startYear: "",
+    endYear: ""
+  };
+
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    const { name, value } = event.target;
+
+    // Updating the input's state
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = event => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    event.preventDefault();
+    this.setState({
+      topic: "",
+      startYear: "",
+      endYear: ""
+    });
+  };
+
   render() {
+    // Notice how each input has a `value`, `name`, and `onChange` prop
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+      <div>
+        <p>
+          Hello {this.state.firstName} {this.state.lastName}
         </p>
+        <form className="form">
+          <input
+            value={this.state.topic}
+            name="topic"
+            onChange={this.handleInputChange}
+            type="text"
+            placeholder="Topic"
+          />
+          <input
+            value={this.state.startYear}
+            name="startYear"
+            onChange={this.handleInputChange}
+            type="text"
+            placeholder="Start Year"
+          />
+          <input
+            value={this.state.endYear}
+            name="endYear"
+            onChange={this.handleInputChange}
+            type="text"
+            placeholder="End Year"
+          />
+          <button onClick={this.handleFormSubmit}>Submit</button>
+        </form>
       </div>
     );
   }
 }
 
-export default App;
+export default Form;
